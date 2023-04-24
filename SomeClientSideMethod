@@ -1,0 +1,29 @@
+ // To avoid resubmisstion of form
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        
+//DataTable
+
+ function DisplayUser() {
+            //$("[id*=GridView1]").DataTable(
+            $(".Grid1").DataTable(
+                {
+                    bLengthChange: true,
+                    lengthMenu: [[10, 20, -1], [10, 20, "All"]],
+                    bFilter: true,
+                    bSort: true,
+                    bPaginate: true
+                })  
+        }
+        
+Validate And Alert in Swal
+
+function validateForm()
+        {           
+            var projName = $('#<%=txtProjectName.ClientID%>').val().trim();
+            if (projName == "" || projName == undefined) {
+                swal("Project", "Please enter project name.", "warning");
+                return false;
+            }
+         }
