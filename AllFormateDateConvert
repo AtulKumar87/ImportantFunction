@@ -1,0 +1,55 @@
+        public object FormatDate(string InputDate, string FormatStep)
+        {
+            string DT = ""; object DB = "";
+            if (!string.IsNullOrEmpty(InputDate) && !string.IsNullOrEmpty(FormatStep))
+            {
+                DateTime DTA = Convert.ToDateTime(InputDate);
+                switch (FormatStep)
+                {
+                    case "dd/MM/yyyy":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(0, 2).ToString() + "/" + DT.Substring(3, 2).ToString() + "/" + DT.Substring(6, 4).ToString();
+                        break;
+                    case "dd-MM-yyyy":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(0, 2).ToString() + "-" + DT.Substring(3, 2).ToString() + "-" + DT.Substring(6, 4).ToString();
+                        break;
+                    case "dd/MMM/yyyy":
+                        DT = DTA.ToString("dd-MMM-yyyy");
+                        DB = DT.Substring(0, 2).ToString() + "/" + DT.Substring(3, 3).ToString() + "/" + DT.Substring(7, 4).ToString();
+                        break;
+                    case "dd-MMM-yyyy":
+                        DT = DTA.ToString("dd-MMM-yyyy");
+                        DB = DT.Substring(0, 2).ToString() + "-" + DT.Substring(3, 3).ToString() + "-" + DT.Substring(7, 4).ToString();
+                        break;
+                    case "MM/dd/yyyy":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(3, 2).ToString() + "/" + DT.Substring(0, 2).ToString() + "/" + DT.Substring(6, 4).ToString();
+                        break;
+                    case "MM-dd-yyyy":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(3, 2).ToString() + "-" + DT.Substring(0, 2).ToString() + "-" + DT.Substring(6, 4).ToString();
+                        break;
+                    case "yyyy/MM/dd":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(6, 4).ToString() + "/" + DT.Substring(3, 2).ToString() + "/" + DT.Substring(0, 2).ToString();
+                        break;
+                    case "yyyy-MM-dd":
+                        DT = DTA.ToString("dd-MM-yyyy");
+                        DB = DT.Substring(6, 4).ToString() + "-" + DT.Substring(3, 2).ToString() + "-" + DT.Substring(0, 2).ToString();
+                        break;
+                    case "yyyy-MMM-dd":
+                        DT = DTA.ToString("dd-MMM-yyyy");
+                        DB = DT.Substring(6, 4).ToString() + "-" + DT.Substring(3, 2).ToString() + "-" + DT.Substring(0, 2).ToString();
+                        break;
+                    default:
+                        DB = InputDate;
+                        break;
+                }
+            }
+            else
+            {
+                DB = InputDate;
+            }
+            return DB;
+        }
