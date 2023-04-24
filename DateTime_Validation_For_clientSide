@@ -1,0 +1,62 @@
+   <style>
+        .no_padding {
+            padding: 0;
+        }
+
+        .form-group {
+            padding: 0 15px;
+        }
+
+        .padding-top-10 {
+            padding-top: 10px;
+        }
+    </style>
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        h1 {
+            color: green;
+        }
+
+        .ui-datepicker {
+            width: 17em;
+        }
+
+            .ui-datepicker select.ui-datepicker-month,
+            .ui-datepicker select.ui-datepicker-year {
+                color: black !important;
+                background-color: white !important;
+            }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $("#<%=txtShareDate.ClientID%>").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'dd/mm/yy',
+                    minDate: -40,
+                    maxDate: new Date(),
+                    beforeShowDay: my_check
+                });
+            });
+            function my_check(in_date) {
+                if (in_date.getDay() != 5) {
+                    return [false, "notav", 'Not Available'];
+                } else {
+                    return [true, "av", "available"];
+                }
+            }
+        })
+
+        $(function () {
+            $(".dt").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                minDate: new Date()
+            });
+        });
+
+    </script>
