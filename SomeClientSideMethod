@@ -2,9 +2,12 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-        
+ // To avoid Prevent Back for login page case:
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+-----------------------------------------------------------        
 //DataTable
-
  function DisplayUser() {
             //$("[id*=GridView1]").DataTable(
             $(".Grid1").DataTable(
@@ -16,9 +19,8 @@
                     bPaginate: true
                 })  
         }
-        
+----------------------------------------------------        
 Validate And Alert in Swal
-
 function validateForm()
         {           
             var projName = $('#<%=txtProjectName.ClientID%>').val().trim();
@@ -27,3 +29,21 @@ function validateForm()
                 return false;
             }
          }
+-------------------------------------------
+ShowHide Password:
+ $(document).ready(function () {
+            $("#togglePass").click(function () {
+
+                var a = $('#<%= txtPassword.ClientID %>').attr("type");
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $($(this).attr("toggle"));
+
+                if (a == "password") {
+                    $('#<%= txtPassword.ClientID %>').attr("type", "text");
+                }
+                else {
+                    $('#<%= txtPassword.ClientID %>').attr("type", "password");
+                }
+
+            });
+        });
