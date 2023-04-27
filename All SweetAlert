@@ -1,0 +1,63 @@
+SweetAlert CDN:- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+Call Backend Methode:
+--------------------
+this.ClientScript.RegisterStartupScript(this.GetType(), "SweetAlert", "swal('Validate UserID','Please Enter Valid UserId','error');", true);
+===============================================================================================================================================
+
+SweetAlert 2:
+--------------
+CDN URL:- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+--------------------------------------------------------------------------------------
+Backend Call client script Method.
+---------------------------------
+ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "showDialogWithPassingParams('" + compcode + "');", true);
+ --------------------------------------------------------------------
+ <script>
+        function showDialogWithPassingParams(compcode) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (result) {
+                if (result.value) {
+                    var settings = {
+                        "url": "http://localhost:59840/api/Rpt_MGT1/DL_DeleteGenerateKYC",
+                        //"url": "https://ssapi.ankitonline.com/api/Rpt_MGT1/DL_DeleteGenerateKYC", -- for Live
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "data": JSON.stringify({
+                            "Ind": "2",
+                            "Co_Code": compcode
+                        }),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        if (response != null) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        } else {
+                            Swal.fire(
+                                'Deleted!',
+                                'Due to some technical error.',
+                                'Fail'
+                            )
+                        }
+                        console.log(response);
+                    });
+                }
+            })
+            debugger;
+            console.log(compcode);
+        }
+    </script>
