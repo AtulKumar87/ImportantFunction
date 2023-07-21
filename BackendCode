@@ -1,0 +1,14 @@
+========================================Start====================================================
+1) Save Bulk record in DataBase using SqlBulkCopy
+Code:
+ using (SqlBulkCopy bulkCopy = new SqlBulkCopy(con))
+                        {
+                            bulkCopy.DestinationTableName = "TempTrn_AsbaFile";
+ //bulkCopy.BulkCopyTimeout = 60;
+                            //dt col name-- - server dt name. Common(MAPPING)
+                            bulkCopy.ColumnMappings.Add("Co_Code", "Co_Code");
+ //Saving Bulk Data in Table
+                            bulkCopy.WriteToServer(dt);
+                            //bulkCopy.WriteToServerAsync(dt);
+}
+========================================END======================================================
