@@ -1,3 +1,4 @@
+=======================================Start=====================================================
 1)Convert Xlsx File To CSV Using Aspose.Cells
 Instal Package
 PM> Install-Package Aspose.Cells
@@ -7,7 +8,8 @@ Workbook workbook = new Workbook("CSVtoExcel.xlsx");
 
 // Save XLSX as CSV file
 workbook.Save("ExcelToCSV.csv", SaveFormat.CSV);
----------------------------------------------------
+=======================================END=====================================================
+=======================================Start=====================================================
 2) Convert Any Type Using IronXL.Excel
 Instal Package
 Install-Package IronXL.Excel
@@ -31,3 +33,78 @@ byte[] binary = workBook.ToBinary();
 byte[] byteArray = workBook.ToByteArray();
 System.Data.DataSet dataSet = workBook.ToDataSet(); // Allow easy integration with DataGrids, SQL and EF
 Stream stream = workBook.ToStream();
+=======================================END=====================================================
+=======================================Start=====================================================
+3) Convert Datatable/DataSet to File Without Header
+Backend Code:
+DataSet ds = JsonConvert.DeserializeObject<DataSet>(res.data.ToString());
+Session["Name"] = fileNm; var path = Server.MapPath("~/ImportFileFolder/" + fileNm);
+//Create Txt file 
+StreamWriter sw = new StreamWriter(Path.Combine(path), false);
+int a = 0;
+for (a = 0; a < ds.Tables.Count; a++)
+{
+foreach (DataRow row in ds.Tables[a].Rows)
+{
+foreach (object item in row.ItemArray)
+{
+sw.Write(item);
+}
+sw.WriteLine();
+}
+}
+sw.Flush();
+sw.Close();
+=======================================END=====================================================
+=======================================Start=====================================================
+4) Convert Datatable/DataSet to File With Header
+Backend Code:
+DataSet ds = JsonConvert.DeserializeObject<DataSet>(res.data.ToString());
+fileNm = "alloteeholding_" + DateTime.Now.ToString("ddMMyyyy") + ".csv";
+Session["Name"] = fileNm; var path = Server.MapPath("~/ImportFileFolder/" + fileNm);
+//Create Txt file 
+StreamWriter sw = new StreamWriter(Path.Combine(path), false);
+ foreach (DataColumn clmns in ds.Tables[0].Columns)
+{
+sw.Write(clmns + ",");
+}
+sw.WriteLine();
+int a = 0;
+for (a = 0; a < ds.Tables.Count; a++)
+{
+foreach (DataRow row in ds.Tables[a].Rows)
+{
+foreach (object item in row.ItemArray)
+{
+sw.Write(item + ",");
+}
+sw.WriteLine();
+}
+}
+sw.Flush();
+sw.Close();
+=======================================END=====================================================
+=======================================Start=====================================================
+5) Convert File to Datatable/DataSet  With Header
+Backend Code:
+using (StreamReader sr = new StreamReader(path))
+{
+//Read File Header
+//string[] headers = sr.ReadLine().Split(',');foreach (string header in headers){dt.Columns.Add(header.Trim());}
+//if ((headers.Length) == (dt.Columns.Count)){
+//HardCoded Header
+dt.Columns.Add("Symbol", typeof(string)); dt.Columns.Add("IFSC_Code", typeof(string)); dt.Columns.Add("ApplicationnNo", typeof(string));
+//}
+while (!sr.EndOfStream){
+string[] rows = sr.ReadLine().Split(',');
+DataRow dr = dt.NewRow();
+for (int i = 0; i < rows.Length; i++)
+{dr[i] = rows[i];}
+DateTime date = DateTime.Now; TimeSpan CurrentTime = DateTime.Now.TimeOfDay;
+string IMPDT = ImpDT.Substring(3, 2) + "/" + ImpDT.Substring(0, 2) + "/" + ImpDT.Substring(6, 4);
+dr["Co_Code"] = Co_Code; dr["Yrcode"] = YrCode; dr["SchCode"] = 0; dr["ImportDate"] = Convert.ToDateTime(IMPDT);
+dr["EntryUserCode"] = UserCode; dr["EntryDate"] = date.ToString("yyyy-MM-dd"); dr["EntryTime"] = CurrentTime;
+dr["Fno"] = rows[4].ToString().Length == 16 ? rows[4].ToString().Substring(8, 8) : rows[4].ToString(); dr["FileName"] = ImportFileName;
+dt.Rows.Add(dr);}}
+=======================================END=====================================================
+=======================================Start===================================================
