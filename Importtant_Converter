@@ -108,3 +108,18 @@ dr["Fno"] = rows[4].ToString().Length == 16 ? rows[4].ToString().Substring(8, 8)
 dt.Rows.Add(dr);}}
 =======================================END=====================================================
 =======================================Start===================================================
+6)Convert Any FILE To ANY FILE
+
+using IronXL;
+// Import any XLSX, XLS, XLSM, XLTX, CSV and TSV
+WorkBook workBook = WorkBook.Load("sample.xlsx");
+// Export the excel file as XLS, XLSX, XLSM, CSV, TSV, JSON, XML
+workBook.SaveAs("sample.xls");
+workBook.SaveAs("sample.tsv");
+workBook.SaveAsCsv("sample.csv");
+workBook.SaveAsJson("sample.json");
+workBook.SaveAsXml("sample.xml");
+// Export the excel file as Html
+workBook.ExportToHtml("sample.html");
+=======================================END=====================================================
+=======================================Start===================================================
