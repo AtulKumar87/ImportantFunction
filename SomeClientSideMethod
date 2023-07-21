@@ -47,3 +47,53 @@ ShowHide Password:
 
             });
         });
+===============================================START========================================================
+Download Any File For Using Asp.net C#
+
+ClientSide Code:
+................
+ <script>
+        function callAnchorForDownLoadFile() {
+            $("#ContentPlaceHolder1_txtfiledownload").click();
+        }
+        var cnt = 0;
+        function call(link) {
+            var cancelled = false;
+            if (cnt == 1) {
+                return;
+            }
+            if (document.createEvent) {
+                var event = document.createEvent("MouseEvents");
+                event.initMouseEvent("click", true, true, window,
+                    0, 0, 0, 0, 0,
+                    false, false, false, false,
+                    0, null);
+                cnt = 1;
+                link.dispatchEvent(event);
+            }
+            else if (link.fireEvent) {
+                cancelled = !link.fireEvent("onclick");
+            }
+        }
+    </script>
+--------------------------------------------
+HTML Use:
+<a href="" id="txtfiledownload" onclick="call(this);" runat="server" visible="true"></a>
+-------------------------------------------
+Server Side Code:
+ public void DownLoadAndClean()
+        {
+            string fileNm = Session["Name"].ToString();
+            string strURL = Server.MapPath("~/ImportFileFolder/" + fileNm);
+            WebClient req = new WebClient();
+            byte[] str = req.DownloadData(strURL);
+            string txtFilePath = Convert.ToBase64String(str);
+            txtfiledownload.HRef = "data:text/plain;base64," + txtFilePath;
+            //txtfiledownload.Target = "_self";
+            txtfiledownload.Attributes.Add("download", fileNm);
+            ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:callAnchorForDownLoadFile(); ", true);
+        }
+
+================================================END=======================================================
+
+
