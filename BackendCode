@@ -11,4 +11,22 @@ Code:
                             bulkCopy.WriteToServer(dt);
                             //bulkCopy.WriteToServerAsync(dt);
 }
-========================================END======================================================
+========================================End======================================================
+========================================Start====================================================
+2) Convert Datatable to XLS and XLSX file
+
+using (var workbook = new XLWorkbook())
+    {
+        var worksheet = workbook.Worksheets.Add(dt);
+        using (var stream = new MemoryStream())
+        {
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheet.sheet";
+            Response.AddHeader("content-disposition", "attachment; filename=name_you_file.xlsx");
+            Response.BinaryWrite(content);
+            Response.End();
+        }
+    }
+========================================End======================================================
+========================================Start====================================================
