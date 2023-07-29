@@ -1,13 +1,17 @@
- // To avoid resubmisstion of form
+===============================================START========================================================
+Note: To avoid resubmisstion of form
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
- // To avoid Prevent Back for login page case:
+================================================END=========================================================
+===============================================START========================================================
+Note: To avoid Prevent Back for login page case:
         function preventBack() { window.history.forward(); }
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };
------------------------------------------------------------        
-//DataTable
+================================================END=========================================================
+===============================================START========================================================
+Note: DataTable
  function DisplayUser() {
             //$("[id*=GridView1]").DataTable(
             $(".Grid1").DataTable(
@@ -19,8 +23,9 @@
                     bPaginate: true
                 })  
         }
-----------------------------------------------------        
-Validate And Alert in Swal
+================================================END=========================================================
+===============================================START========================================================
+Note: Validate And Alert in Swal
 function validateForm()
         {           
             var projName = $('#<%=txtProjectName.ClientID%>').val().trim();
@@ -29,8 +34,9 @@ function validateForm()
                 return false;
             }
          }
--------------------------------------------
-ShowHide Password:
+================================================END=========================================================
+===============================================START========================================================
+Note: ShowHide Password:
  $(document).ready(function () {
             $("#togglePass").click(function () {
 
@@ -47,8 +53,9 @@ ShowHide Password:
 
             });
         });
+================================================END=========================================================
 ===============================================START========================================================
-Download Any File For Using Asp.net C#
+Note: Download Any File For Using Asp.net C#
 
 ClientSide Code:
 ................
@@ -94,6 +101,24 @@ Server Side Code:
             ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:callAnchorForDownLoadFile(); ", true);
         }
 
-================================================END=======================================================
+================================================END=========================================================
+===============================================START========================================================
+Note: Do not allow characters and allow only numeric value
 
+ClientSide:
+    <script>
+        var validNumber = new RegExp(/^\d*\.?\d*$/);
+        var lastValid = document.getElementById("<%=txt1month.ClientID%>").value;
+        function validateNumber(elem) {
+            if (validNumber.test(elem.value)) {
+                lastValid = elem.value;
+            } else {
+                elem.value = lastValid;
+            }
+        }
+    </script>
 
+HTML Code:
+<asp:TextBox ID="txt1month" runat="server" placeholder="%" CssClass="form-control " 
+oninput="validateNumber(this);" MaxLength="5"></asp:TextBox>
+================================================END=========================================================
