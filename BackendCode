@@ -30,3 +30,6 @@ using (var workbook = new XLWorkbook())
     }
 ========================================End======================================================
 ========================================Start====================================================
+3) Get System Current Session ID:
+
+string ss=System.Web.HttpContext.Current.Session.SessionID;
