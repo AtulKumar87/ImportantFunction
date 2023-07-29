@@ -33,3 +33,27 @@ using (var workbook = new XLWorkbook())
 3) Get System Current Session ID:
 
 string ss=System.Web.HttpContext.Current.Session.SessionID;
+========================================End======================================================
+========================================Start====================================================
+4) Multiple file Save 
+[HttpPost]
+    public ActionResult Index(List<HttpPostedFileBase> postedFiles)
+    {
+        string path = Server.MapPath("~/Uploads/");
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        foreach (HttpPostedFileBase pFile in postedFiles)
+        {
+            if (postedFile != null)
+            {
+                string fileName = Path.GetFileName(pFile.FileName);
+                pFile.SaveAs(path + fileName);
+                ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+            }
+        }
+
+        return View();
+    }
