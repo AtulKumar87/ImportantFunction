@@ -27,7 +27,7 @@ ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "showDialogWithPas
                 if (result.value) {
                     var settings = {
                         "url": "http://localhost:59840/api/Rpt_MGT1/DL_DeleteGenerateKYC",
-                        //"url": "https://ssapi.ankitonline.com/api/Rpt_MGT1/DL_DeleteGenerateKYC", -- for Live
+                    
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
